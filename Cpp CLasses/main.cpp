@@ -18,7 +18,12 @@ public:
         coordinateY = date_y;
     }
     void printPointPosition(){
+        std::cout << "position (x, y):" << std::endl;
         std::cout << "(" << coordinateX << ", " << coordinateY << ")" << std::endl;
+    }
+    void getInformation(){
+        std::cout << "This is point with ";
+        printPointPosition();
     }
 };
 
@@ -26,7 +31,7 @@ public:
 int main(int argc, char *argv[])
 {
     Point x(-100, 0);
-    x.printPointPosition();
+    x.getInformation();
     return 0;
 }
 
