@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <set>
+#include <vector>
 
 class Point {
 private:
@@ -101,11 +102,17 @@ public:
     }
 };
 
+class Polyline{
+private:
+    std::vector<Point> points;
+public:
+
+};
 
 int main() {
-    Point x(1000, 0.5);
-    Point y(1, 0.4789);
-    Point w(111, 10);
+    Point x(0, 0);
+    Point y(0, 1);
+    Point w(1, 1);
     x.getInformation();
     y.getInformation();
     w.getInformation();
