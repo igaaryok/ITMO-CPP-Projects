@@ -4,20 +4,17 @@
 #include "shapes.h"
 
 
-
-
-
 int main() {
     Point x(0, 0);
-    Point y(0, 1);
+    Point y(1, 1);
     Point w(1, 1);
-    Point z;
-
-//    Polyline{x, y, w};
+    Point z{1, 2};
     x.getInformation();
     y.getInformation();
     w.getInformation();
     z.getInformation();
+    Polyline p({x, y, z});
+    p.getInformation();
 //    try {
 //        Triangle tri(x, y, w);
 //        tri.getInformation();

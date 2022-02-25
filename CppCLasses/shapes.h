@@ -28,15 +28,15 @@ public:
 
     double getValueY() const;
 
-    void printPointPosition() const;
-
     void getInformation() const;
 
     Point &operator=(const Point &other);
 
 };
 
-bool isOnePoint(Point &a, Point &b);
+bool operator==(const Point& lhs, const Point& rhs);
+bool operator&&(const Point& lhs, const Point& rhs);
+std::ostream& operator<<(std::ostream& stream, const Point& point);
 
 //class Triangle {
 //private:
@@ -93,12 +93,18 @@ bool isOnePoint(Point &a, Point &b);
 //    }
 //};
 
-class Polyline{
+class Polyline {
 private:
-    int pointsNumber;
     std::vector<Point> points_;
 public:
-    Polyline(int n, Point points[]);
+    Polyline();
+
+    explicit Polyline(const std::vector<Point> &points);
+
+    int howManyPoints();
+
+    void getInformation();
+
 };
 
 

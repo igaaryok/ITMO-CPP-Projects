@@ -29,27 +29,45 @@ double Point::getValueY() const {
     return coordinateY_;
 }
 
-void Point::printPointPosition() const {
-    std::cout << "(" << coordinateX_ << ", " << coordinateY_ << ")," << std::endl;
-}
-
 void Point::getInformation() const {
-    std::cout << "This is point ";
-    printPointPosition();
+    std::cout << "This is point (" << getValueX() << ", " << getValueY() << ")" << std::endl;
 }
 
 Point &Point::operator=(const Point &other) = default;
 
-bool isOnePoint(Point &a, Point &b) {
-    return (a.getValueX() == b.getValueX()) && (a.getValueY() == b.getValueY());
+bool operator==(const Point &lhs, const Point &rhs) {
+    return (lhs.getValueX() == rhs.getValueX()) && (lhs.getValueY() == rhs.getValueY());
 }
 
-Polyline::Polyline(int n, Point points[]) {
-    pointsNumber = n;
-    for (int i = 0; i < n; ++i) {
-        points_.push_back(points[i]);
-    }
-    for (auto v:points_) {
-        v.printPointPosition();
-    }
+std::ostream& operator<<(std::ostream& stream, const Point& point){
+    stream << "(" << point.getValueY() << ", " << point.getValueY() << ")";
+    return stream;
 }
+
+Polyline::Polyline() {
+    Point a;
+    points_.push_back(a);
+}
+
+Polyline::Polyline(const std::vector<Point> &points) {
+    for (int i = 0; i < points.size(); ++i) {
+        for (int j = i + 1; j < points.size(); ++j) {
+            if (points[i] == points[j]) {
+                throw std::runtime_error("This is not a polyline.");
+            }
+        }
+    }
+    points_ = points;
+}
+
+int Polyline::howManyPoints() {
+    return points_.size();
+}
+
+void Polyline::getInformation() {
+    std::cout << "This is polyline: ";
+    for (const auto& v: points_) {
+        std::cout << v << ", ";
+    }
+    std::cout << std::endl;
+};
