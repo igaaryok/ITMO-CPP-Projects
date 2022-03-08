@@ -34,9 +34,15 @@ public:
 
 };
 
-bool operator==(const Point& lhs, const Point& rhs);
-bool operator&&(const Point& lhs, const Point& rhs);
-std::ostream& operator<<(std::ostream& stream, const Point& point);
+bool operator==(const Point &lhs, const Point &rhs);
+
+bool operator&&(const Point &lhs, const Point &rhs);
+
+std::ostream &operator<<(std::ostream &stream, const Point &point);
+
+double distanceBetweenPoints(const Point &a, const Point &b);
+
+bool onOneLine(const std::vector<Point> &points);
 
 //class Triangle {
 //private:
@@ -94,17 +100,35 @@ std::ostream& operator<<(std::ostream& stream, const Point& point);
 //};
 
 class Polyline {
-private:
+protected:
     std::vector<Point> points_;
 public:
-    Polyline();
-
     explicit Polyline(const std::vector<Point> &points);
 
-    int howManyPoints();
+    Polyline(const Polyline &object);
 
-    void getInformation();
+    unsigned int howManyPoints();
+
+    virtual double getPerimeter();
+
+    virtual void getInformation();
 
 };
 
+class ClosedPolyline : public Polyline {
+public:
+    explicit ClosedPolyline(const std::vector<Point> &points);
 
+    ClosedPolyline(const ClosedPolyline &object);
+
+    double getPerimeter() override;
+
+    double getSquare();
+
+    void getInformation() override;
+};
+
+class Triangle : public ClosedPolyline {
+public:
+    explicit Triangle(const std::vector<Point> &points);
+};
