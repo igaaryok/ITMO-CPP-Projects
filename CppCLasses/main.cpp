@@ -5,24 +5,28 @@
 
 
 int main() {
-    // points test
+    // Points test
     Point x(0, 0);
     Point y(1, 1);
     Point z{1, 2};
     Point w{50, 20};
-    x.getInformation();
-    y.getInformation();
-    z.getInformation();
-    // polyline test
+    std::cout << x.getInformation() << std::endl;
+    std::cout << y.getInformation() << std::endl;
+    std::cout << z.getInformation() << std::endl;
+    // Polyline test
     Polyline p({x, y, z});
-    p.getInformation();
+    std::cout << p.getInformation() << std::endl;
     std::cout << p.getPerimeter() << std::endl;
-    // closed polyline test
+    // Closed polyline test
     ClosedPolyline c({x, y, z, w});
-    c.getInformation();
+    std::cout << c.getInformation() << std::endl;
     std::cout << c.getPerimeter() << std::endl;
     std::cout << c.getSquare() << std::endl;
+    // Triangle test
     Triangle tri({x, y, z});
+    std::cout << tri.getInformation() << std::endl;
+    std::cout << tri.getPerimeter() << std::endl;
+    std::cout << tri.getSquare() << std::endl;
 //    try {
 //        Triangle tri(x, y, w);
 //        tri.getInformation();

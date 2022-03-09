@@ -31,8 +31,10 @@ double Point::getValueY() const {
     return coordinateY_;
 }
 
-void Point::getInformation() const {
-    std::cout << "Point (" << getValueX() << ", " << getValueY() << ")" << std::endl;
+std::string Point::getInformation() const {
+    std::ostringstream oss;
+    oss << "Point (" << getValueX() << ", " << getValueY() << ")";
+    return oss.str();
 }
 
 Point &Point::operator=(const Point &other) = default;
@@ -50,16 +52,16 @@ double distanceBetweenPoints(const Point &a, const Point &b) {
     return sqrt(pow(b.getValueX() - a.getValueX(), 2) + pow(b.getValueY() - a.getValueY(), 2));
 }
 
-bool onOneLine(const std::vector<Point> &points){
+bool onOneLine(const std::vector<Point> &points) {
     double x = points[0].getValueX();
     double y = points[0].getValueY();
     bool sameX = true;
     bool sameY = true;
     for (int i = 1; i < points.size(); ++i) {
-        if (points[i].getValueX() != x){
+        if (points[i].getValueX() != x) {
             sameX = false;
         }
-        if (points[i].getValueY() != y){
+        if (points[i].getValueY() != y) {
             sameY = false;
         }
     }
@@ -88,12 +90,13 @@ unsigned int Polyline::howManyPoints() {
     return points_.size();
 }
 
-void Polyline::getInformation() {
-    std::cout << "Polyline: ";
+std::string Polyline::getInformation() {
+    std::ostringstream oss;
+    oss << "Polyline: ";
     for (const auto &v: points_) {
-        std::cout << v << " ";
+        oss << v << " ";
     }
-    std::cout << std::endl;
+    return oss.str();
 };
 
 double Polyline::getPerimeter() {
@@ -125,19 +128,25 @@ double ClosedPolyline::getSquare() {
     return square;
 }
 
-void ClosedPolyline::getInformation() {
-    std::cout << "Closed ";
-    Polyline::getInformation();
+std::string ClosedPolyline::getInformation() {
+    return "Closed" + Polyline::getInformation();
 }
 
 
 // Triangle
 Triangle::Triangle(const std::vector<Point> &points) : ClosedPolyline(points) {
-    if (points.size() != 3
-    or points[0] == points[1]
-    or points[1] == points[2]
-    or points[0] == points[2]
-    or onOneLine(points)){
+    if (points.size() != 3 or onOneLine(points)) {
         throw std::runtime_error("This is not a triangle");
     }
+}
+
+std::string Triangle::getInformation() {
+    std::ostringstream oss;
+    oss << "Triangle: " << points_[0] << " " << points_ [1] << " " << points_ [2];
+    return oss.str();
+}
+
+// Polygon
+Polygon::Polygon(const std::vector<Point> &points) : ClosedPolyline(points) {
+
 }

@@ -9,6 +9,9 @@
 #include <set>
 #include <vector>
 #include <cstdarg>
+#include <string>
+#include <sstream>
+
 
 class Point {
 private:
@@ -28,7 +31,7 @@ public:
 
     double getValueY() const;
 
-    void getInformation() const;
+    std::string getInformation() const;
 
     Point &operator=(const Point &other);
 
@@ -44,60 +47,6 @@ double distanceBetweenPoints(const Point &a, const Point &b);
 
 bool onOneLine(const std::vector<Point> &points);
 
-//class Triangle {
-//private:
-//    Point pointA_,
-//            pointB_,
-//            pointC_;
-//public:
-//    Triangle(const Point &a, const Point &b, const Point &c) {
-//        setPoints(a, b, c);
-//    }
-//
-//    static int checkTriangle(const Point &a, const Point &b, const Point &c) {
-//        std::set<double> setX, setY;
-//        setX.insert(a.getValueX());
-//        setX.insert(b.getValueX());
-//        setX.insert(c.getValueX());
-//        setY.insert(a.getValueY());
-//        setY.insert(b.getValueY());
-//        setY.insert(c.getValueY());
-//        return (setX.set::size() > 1 && setY.set::size() > 1) &&
-//               !(isOnePoint(a, b) || isOnePoint(a, c) || isOnePoint(b, c));
-//    }
-//
-//    void setPoints(const Point &a, const Point &b, const Point &c) {
-//        if (checkTriangle(a, b, c)) {
-//            pointA_ = a;
-//            pointB_ = b;
-//            pointC_ = c;
-//        } else {
-//            throw std::runtime_error("This is not triangle.");
-//        }
-//    }
-//
-//    double getArea() {
-//        return 1. / 2. * fabs((pointB_.getValueX() - pointA_.getValueX()) * (pointC_.getValueY() - pointA_.getValueY()) -
-//                              (pointC_.getValueX() - pointA_.getValueX()) * (pointB_.getValueY() - pointA_.getValueY()));
-//    }
-//
-//    double getPerimeter() {
-//        return sqrt(pow(pointB_.getValueX() - pointA_.getValueX(), 2) + pow(pointB_.getValueY() - pointA_.getValueY(), 2)) +
-//               sqrt(pow(pointC_.getValueX() - pointA_.getValueX(), 2) + pow(pointC_.getValueY() - pointA_.getValueY(), 2)) +
-//               sqrt(pow(pointB_.getValueX() - pointC_.getValueX(), 2) + pow(pointB_.getValueY() - pointC_.getValueY(), 2));
-//    }
-//
-//    void getInformation() {
-//        std::cout << "Triangle[" << std::endl;
-//        std::cout << "  ";
-//        pointA_.printPointPosition();
-//        std::cout << "  ";
-//        pointB_.printPointPosition();
-//        std::cout << "  ";
-//        pointC_.printPointPosition();
-//        std::cout << "], with area: " << getArea() << ", with perimeter: " << getPerimeter() << std::endl;
-//    }
-//};
 
 class Polyline {
 protected:
@@ -111,9 +60,10 @@ public:
 
     virtual double getPerimeter();
 
-    virtual void getInformation();
+    virtual std::string getInformation();
 
 };
+
 
 class ClosedPolyline : public Polyline {
 public:
@@ -125,10 +75,19 @@ public:
 
     double getSquare();
 
-    void getInformation() override;
+    std::string getInformation() override;
 };
+
 
 class Triangle : public ClosedPolyline {
 public:
     explicit Triangle(const std::vector<Point> &points);
+
+    std::string getInformation() override;
+};
+
+
+class Polygon : public ClosedPolyline {
+public:
+    explicit Polygon(const std::vector<Point> &points);
 };
