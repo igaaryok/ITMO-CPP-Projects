@@ -19,6 +19,7 @@ int main() {
     std::cout << p.getPerimeter() << std::endl;
     // Closed polyline test
     ClosedPolyline c({x, y, z, w});
+    ClosedPolyline cl = c;
     std::cout << c.getInformation() << std::endl;
     std::cout << c.getPerimeter() << std::endl;
     std::cout << c.getSquare() << std::endl;

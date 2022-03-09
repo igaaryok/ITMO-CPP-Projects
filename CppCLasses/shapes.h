@@ -47,6 +47,8 @@ double distanceBetweenPoints(const Point &a, const Point &b);
 
 bool onOneLine(const std::vector<Point> &points);
 
+bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>);
+
 
 class Polyline {
 protected:

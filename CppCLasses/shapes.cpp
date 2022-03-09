@@ -68,6 +68,9 @@ bool onOneLine(const std::vector<Point> &points) {
     return sameX or sameY;
 }
 
+bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>){
+
+}
 
 // Polyline class
 Polyline::Polyline(const std::vector<Point> &points) {
