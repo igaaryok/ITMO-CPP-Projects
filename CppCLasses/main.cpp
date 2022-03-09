@@ -19,7 +19,6 @@ int main() {
     std::cout << p.getPerimeter() << std::endl;
     // Closed polyline test
     ClosedPolyline c({x, y, z, w});
-    ClosedPolyline cl = c;
     std::cout << c.getInformation() << std::endl;
     std::cout << c.getPerimeter() << std::endl;
     std::cout << c.getSquare() << std::endl;
@@ -28,14 +27,6 @@ int main() {
     std::cout << tri.getInformation() << std::endl;
     std::cout << tri.getPerimeter() << std::endl;
     std::cout << tri.getSquare() << std::endl;
-//    try {
-//        Triangle tri(x, y, w);
-//        tri.getInformation();
-//    }
-//    catch (std::runtime_error &e) {
-//        std::cerr << e.what() << std::endl;
-//        return -1;
-//    }
     return 0;
 }
 

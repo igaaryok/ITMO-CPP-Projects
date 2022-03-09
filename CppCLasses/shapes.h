@@ -54,6 +54,8 @@ class Polyline {
 protected:
     std::vector<Point> points_;
 public:
+    Polyline();
+
     explicit Polyline(const std::vector<Point> &points);
 
     Polyline(const Polyline &object);
@@ -69,6 +71,8 @@ public:
 
 class ClosedPolyline : public Polyline {
 public:
+    ClosedPolyline();
+
     explicit ClosedPolyline(const std::vector<Point> &points);
 
     ClosedPolyline(const ClosedPolyline &object);
@@ -83,6 +87,8 @@ public:
 
 class Triangle : public ClosedPolyline {
 public:
+    Triangle();
+
     explicit Triangle(const std::vector<Point> &points);
 
     std::string getInformation() override;

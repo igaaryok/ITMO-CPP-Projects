@@ -68,11 +68,13 @@ bool onOneLine(const std::vector<Point> &points) {
     return sameX or sameY;
 }
 
-bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>){
+bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>) {
 
 }
 
 // Polyline class
+Polyline::Polyline() = default;
+
 Polyline::Polyline(const std::vector<Point> &points) {
     if (points.size() < 2) throw std::runtime_error("This is not a polyline.");
     for (int i = 0; i < points.size(); ++i) {
@@ -112,12 +114,17 @@ double Polyline::getPerimeter() {
 
 
 // Closed polyline
+ClosedPolyline::ClosedPolyline() : Polyline() {}
+
 ClosedPolyline::ClosedPolyline(const std::vector<Point> &points) : Polyline(points) {}
 
 ClosedPolyline::ClosedPolyline(const ClosedPolyline &object) = default;
 
 double ClosedPolyline::getPerimeter() {
-    double perimeter = Polyline::getPerimeter() + distanceBetweenPoints(points_[0], points_[points_.size() - 1]);
+    double perimeter = 0;
+    if (points_.size() > 1) {
+        perimeter = Polyline::getPerimeter() + distanceBetweenPoints(points_[0], points_[points_.size() - 1]);
+    }
     return perimeter;
 }
 
@@ -137,6 +144,8 @@ std::string ClosedPolyline::getInformation() {
 
 
 // Triangle
+Triangle::Triangle() : ClosedPolyline() {}
+
 Triangle::Triangle(const std::vector<Point> &points) : ClosedPolyline(points) {
     if (points.size() != 3 or onOneLine(points)) {
         throw std::runtime_error("This is not a triangle");
@@ -145,7 +154,10 @@ Triangle::Triangle(const std::vector<Point> &points) : ClosedPolyline(points) {
 
 std::string Triangle::getInformation() {
     std::ostringstream oss;
-    oss << "Triangle: " << points_[0] << " " << points_ [1] << " " << points_ [2];
+    oss << "Triangle: ";
+    if (points_.size() == 3) {
+        oss << points_[0] << " " << points_[1] << " " << points_[2];
+    }
     return oss.str();
 }
 
