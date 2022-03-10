@@ -1,6 +1,7 @@
 //
 // Created by Igor on 15.02.2022.
 //
+#include <iostream>
 #include "shapes.h"
 
 
@@ -27,6 +28,12 @@ int main() {
     std::cout << tri.getInformation() << std::endl;
     std::cout << tri.getPerimeter() << std::endl;
     std::cout << tri.getSquare() << std::endl;
+    // Polygon
+    Polygon pol({x, y, w, z});
+    std::cout << pol.getInformation() << std::endl;
+    std::cout << pol.getPerimeter() << std::endl;
+    std::cout << pol.getSquare() << std::endl;
+
     return 0;
 }
 

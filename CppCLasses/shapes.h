@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <iostream>
 #include <cmath>
 #include <set>
 #include <vector>
@@ -97,5 +96,16 @@ public:
 
 class Polygon : public ClosedPolyline {
 public:
+    Polygon();
+
     explicit Polygon(const std::vector<Point> &points);
+
+    std::string getInformation() override;
+};
+
+class RegularPolygon : public Polygon{
+public:
+    RegularPolygon();
+
+    explicit RegularPolygon(const std::vector<Point> &points);
 };

@@ -102,7 +102,7 @@ std::string Polyline::getInformation() {
         oss << v << " ";
     }
     return oss.str();
-};
+}
 
 double Polyline::getPerimeter() {
     double perimeter = 0;
@@ -162,6 +162,20 @@ std::string Triangle::getInformation() {
 }
 
 // Polygon
-Polygon::Polygon(const std::vector<Point> &points) : ClosedPolyline(points) {
+Polygon::Polygon() : ClosedPolyline() {}
 
+Polygon::Polygon(const std::vector<Point> &points) : ClosedPolyline(points) {}
+
+std::string Polygon::getInformation() {
+    std::ostringstream oss;
+    oss << "Polygon: ";
+    for (const auto &point: points_) {
+        oss << point << " ";
+    }
+    return oss.str();
 }
+
+// Regular polygon
+RegularPolygon::RegularPolygon() : Polygon() {}
+
+RegularPolygon::RegularPolygon(const std::vector<Point> &points) : Polygon(points) {}
