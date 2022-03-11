@@ -10,6 +10,10 @@
 #include <cstdarg>
 #include <string>
 #include <sstream>
+#include <limits>
+
+#define PI 3.14159265
+#define EPS 0.01
 
 
 class Point {
@@ -46,8 +50,11 @@ double distanceBetweenPoints(const Point &a, const Point &b);
 
 bool onOneLine(const std::vector<Point> &points);
 
+std::pair<double, double> vectorFromPoints(const Point &a, const Point &b);
+
 bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>);
 
+double cosBetweenVectors(const std::pair<double, double> &a, const std::pair<double, double> &b);
 
 class Polyline {
 protected:
@@ -103,9 +110,20 @@ public:
     std::string getInformation() override;
 };
 
-class RegularPolygon : public Polygon{
+class RegularPolygon : public Polygon {
 public:
     RegularPolygon();
 
     explicit RegularPolygon(const std::vector<Point> &points);
+
+    std::string getInformation() override;
+};
+
+class Trapezoid : public Polygon {
+public:
+    Trapezoid();
+
+    explicit Trapezoid(const std::vector<Point> &points);
+
+    std::string getInformation() override;
 };

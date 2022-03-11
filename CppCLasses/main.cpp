@@ -7,10 +7,10 @@
 
 int main() {
     // Points test
-    Point x(0, 0);
-    Point y(1, 1);
-    Point z{1, 2};
-    Point w{50, 20};
+    Point x(-2, 0);
+    Point y(2, 0);
+    Point z{1, 3};
+    Point w{-1, 3};
     std::cout << x.getInformation() << std::endl;
     std::cout << y.getInformation() << std::endl;
     std::cout << z.getInformation() << std::endl;
@@ -28,12 +28,18 @@ int main() {
     std::cout << tri.getInformation() << std::endl;
     std::cout << tri.getPerimeter() << std::endl;
     std::cout << tri.getSquare() << std::endl;
-    // Polygon
-    Polygon pol({x, y, w, z});
+    // Polygon test
+    Polygon pol({x, y, z, w});
     std::cout << pol.getInformation() << std::endl;
     std::cout << pol.getPerimeter() << std::endl;
     std::cout << pol.getSquare() << std::endl;
-
+    // Regular polygon test
+//    RegularPolygon rp({x, y, z});
+//    std::cout << rp.getInformation() << std::endl;
+    // Trapezoid test
+    Trapezoid tr({x, y, z, w});
+    std::cout << tr.getInformation() << std::endl;
+    std::cout << tr.getSquare() << std::endl;
     return 0;
 }
 

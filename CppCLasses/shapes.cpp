@@ -3,7 +3,7 @@
 //
 
 #include "shapes.h"
-
+#include <iostream>
 
 // Point class
 Point::Point(double date_x, double date_y) {
@@ -66,6 +66,23 @@ bool onOneLine(const std::vector<Point> &points) {
         }
     }
     return sameX or sameY;
+}
+
+std::pair<double, double> vectorFromPoints(const Point &a, const Point &b) {
+    std::pair<double, double> p;
+    p.first = b.getValueX() - a.getValueX();
+    p.second = b.getValueY() - a.getValueY();
+    return p;
+}
+
+double cosBetweenVectors(const std::pair<double, double> &a, const std::pair<double, double> &b) {
+    return (a.first * b.first + a.second * b.second) /
+           (sqrt(pow(a.first, 2) + pow(a.second, 2)) * sqrt(pow(b.first, 2) +
+                                                            pow(b.second, 2)));
+}
+
+bool isParallel(const std::pair<double, double> &a, const std::pair<double, double> &b) {
+    return !(a.first * b.second - a.second * b.first);
 }
 
 bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>) {
@@ -134,6 +151,8 @@ double ClosedPolyline::getSquare() {
         square += points_[i - 1].getValueX() * points_[i].getValueY() -
                   points_[i].getValueX() * points_[i - 1].getValueY();
     }
+    square += points_[points_.size() - 1].getValueX() * points_[0].getValueY() -
+              points_[0].getValueX() * points_[points_.size() - 1].getValueY();
     square = 1. / 2. * std::abs(square);
     return square;
 }
@@ -175,7 +194,51 @@ std::string Polygon::getInformation() {
     return oss.str();
 }
 
+
 // Regular polygon
 RegularPolygon::RegularPolygon() : Polygon() {}
 
-RegularPolygon::RegularPolygon(const std::vector<Point> &points) : Polygon(points) {}
+RegularPolygon::RegularPolygon(const std::vector<Point> &points) : Polygon(points) {
+    double degree = (points_.size() - 2) * 180. / points_.size();
+    double side = distanceBetweenPoints(points_[0], points_[points.size() - 1]);
+    for (int i = 0; i < points_.size(); ++i) {
+        if (fabs(distanceBetweenPoints(points_[i], points_[i + 1]) - side) > EPS
+            or fabs(cosBetweenVectors(vectorFromPoints(points_[i - 1], points_[i]),
+                                      vectorFromPoints(points_[i], points_[i + 1])) -
+                    cos(degree * PI / 180)) > EPS)
+            throw std::runtime_error("This is not a regular polygon.");
+
+
+    }
+}
+
+std::string RegularPolygon::getInformation() {
+    std::ostringstream oss;
+    oss << "Regular polygon: ";
+    for (const auto &point: points_) {
+        oss << point << " ";
+    }
+    return oss.str();
+}
+
+
+// Trapezoid
+Trapezoid::Trapezoid() : Polygon() {}
+
+Trapezoid::Trapezoid(const std::vector<Point> &points) : Polygon(points) {
+    if (points_.size() != 4 or
+        (isParallel(vectorFromPoints(points_[0], points_[1]), vectorFromPoints(points[2], points[3])) and
+         isParallel(vectorFromPoints(points_[0], points_[3]), vectorFromPoints(points[2], points[1]))) or
+        !(isParallel(vectorFromPoints(points_[0], points_[1]), vectorFromPoints(points[2], points[3])) or
+          isParallel(vectorFromPoints(points_[0], points_[3]), vectorFromPoints(points[2], points[1]))))
+        throw std::runtime_error("This is not a regular trapezoid.");
+}
+
+std::string Trapezoid::getInformation() {
+    std::ostringstream oss;
+    oss << "Trapezoid: ";
+    for (const auto &point: points_) {
+        oss << point << " ";
+    }
+    return oss.str();
+}
