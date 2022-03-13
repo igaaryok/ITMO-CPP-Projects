@@ -3,9 +3,12 @@
 //
 #include <iostream>
 #include "shapes.h"
+#include "polynomial.h"
+
 
 
 int main() {
+    std::stringstream ss;
     // Points test
     Point x(-2, 0);
     Point y(2, 0);
@@ -40,6 +43,11 @@ int main() {
     Trapezoid tr({x, y, z, w});
     std::cout << tr.getInformation() << std::endl;
     std::cout << tr.getSquare() << std::endl;
+    // Polynomial test
+    Polynomial pole({{2, 2}, {4, 3}});
+    Polynomial poly({{1, 2}, {2, 3}, {10, 0}, {0, 200}});
+    ss << poly + pole << std::endl;
+    std::cout << ss.str();
     return 0;
 }
 

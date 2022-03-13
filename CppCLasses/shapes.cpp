@@ -3,7 +3,6 @@
 //
 
 #include "shapes.h"
-#include <iostream>
 
 // Point class
 Point::Point(double date_x, double date_y) {
@@ -85,9 +84,6 @@ bool isParallel(const std::pair<double, double> &a, const std::pair<double, doub
     return !(a.first * b.second - a.second * b.first);
 }
 
-bool isIntersection(std::pair<Point, Point>, std::pair<Point, Point>) {
-
-}
 
 // Polyline class
 Polyline::Polyline() = default;
