@@ -9,8 +9,8 @@
 int main() {
     std::stringstream ss;
     // Points test
-    Point x(-2, 0);
-    Point y(2, 0);
+    Point x(1, 1);
+    Point y(2, 1);
     Point z{1, 3};
     Point w{-1, 3};
     std::cout << x.getInformation() << std::endl;

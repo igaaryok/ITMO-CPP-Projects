@@ -3,6 +3,7 @@
 //
 
 #include "shapes.h"
+#include <iostream>
 
 // Point class
 Point::Point(double date_x, double date_y) {
@@ -52,19 +53,22 @@ double distanceBetweenPoints(const Point &a, const Point &b) {
 }
 
 bool onOneLine(const std::vector<Point> &points) {
-    double x = points[0].getValueX();
-    double y = points[0].getValueY();
-    bool sameX = true;
-    bool sameY = true;
-    for (int i = 1; i < points.size(); ++i) {
-        if (points[i].getValueX() != x) {
-            sameX = false;
+    double x1 = points[0].getValueX();
+    double y1 = points[0].getValueY();
+    double x2 = points[1].getValueX();
+    double y2 = points[1].getValueY();
+    bool onOneLine = true;
+    for (int i = 2; i < points.size(); ++i) {
+        if (x1 == x2 or y1 == y2){
+            if (x2 == points[i].getValueX() or y2 == points[i].getValueY()){
+                continue;
+            }
+            return false;
         }
-        if (points[i].getValueY() != y) {
-            sameY = false;
-        }
+        onOneLine = (((points[i].getValueX() - x1)/(x2-x1) - (points[i].getValueY()-y1)/(y2-y1)) < EPS);
+        if (!onOneLine) break;
     }
-    return sameX or sameY;
+    return onOneLine;
 }
 
 std::pair<double, double> vectorFromPoints(const Point &a, const Point &b) {
@@ -81,7 +85,7 @@ double cosBetweenVectors(const std::pair<double, double> &a, const std::pair<dou
 }
 
 bool isParallel(const std::pair<double, double> &a, const std::pair<double, double> &b) {
-    return !(a.first * b.second - a.second * b.first);
+    return fabs(a.first * b.second - a.second * b.first) < EPS;
 }
 
 
