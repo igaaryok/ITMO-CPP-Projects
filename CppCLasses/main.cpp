@@ -6,7 +6,6 @@
 #include "polynomial.h"
 
 
-
 int main() {
     std::stringstream ss;
     // Points test
@@ -44,9 +43,13 @@ int main() {
     std::cout << tr.getInformation() << std::endl;
     std::cout << tr.getSquare() << std::endl;
     // Polynomial test
-    Polynomial pole({{2, 2}, {4, 3}});
-    Polynomial poly({{1, 2}, {2, 3}, {10, 0}, {0, 200}});
-    ss << poly + pole << std::endl;
+    Polynomial pole(5, {2, 0, 4});
+    Polynomial poly(3, {2});
+    Polynomial poll;
+    poll += pole * 0;
+    ss << poly << std::endl;
+    ss << pole << std::endl;
+    ss << (pole * poly) + (poly * pole) << std::endl;
     std::cout << ss.str();
     return 0;
 }
