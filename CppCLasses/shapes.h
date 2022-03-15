@@ -64,6 +64,8 @@ public:
 
     explicit Polyline(const std::vector<Point> &points);
 
+    ~Polyline();
+
     Polyline(const Polyline &object);
 
     unsigned int howManyPoints();
@@ -81,6 +83,8 @@ public:
 
     explicit ClosedPolyline(const std::vector<Point> &points);
 
+    ~ClosedPolyline();
+
     ClosedPolyline(const ClosedPolyline &object);
 
     double getPerimeter() override;
@@ -97,6 +101,10 @@ public:
 
     explicit Triangle(const std::vector<Point> &points);
 
+    ~Triangle();
+
+    Triangle(const Triangle &object);
+
     std::string getInformation() override;
 };
 
@@ -107,6 +115,10 @@ public:
 
     explicit Polygon(const std::vector<Point> &points);
 
+    ~Polygon();
+
+    Polygon(const Polygon &object);
+
     std::string getInformation() override;
 };
 
@@ -116,6 +128,10 @@ public:
 
     explicit RegularPolygon(const std::vector<Point> &points);
 
+    ~RegularPolygon();
+
+    RegularPolygon(const RegularPolygon &object);
+
     std::string getInformation() override;
 };
 
@@ -124,6 +140,10 @@ public:
     Trapezoid();
 
     explicit Trapezoid(const std::vector<Point> &points);
+
+    ~Trapezoid();
+
+    Trapezoid(const Trapezoid &object);
 
     std::string getInformation() override;
 };

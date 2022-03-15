@@ -100,6 +100,8 @@ Polyline::Polyline(const std::vector<Point> &points) {
     points_ = points;
 }
 
+Polyline::~Polyline() = default;
+
 Polyline::Polyline(const Polyline &object) {
     points_ = object.points_;
 }
@@ -130,6 +132,8 @@ double Polyline::getPerimeter() {
 ClosedPolyline::ClosedPolyline() : Polyline() {}
 
 ClosedPolyline::ClosedPolyline(const std::vector<Point> &points) : Polyline(points) {}
+
+ClosedPolyline::~ClosedPolyline() = default;
 
 ClosedPolyline::ClosedPolyline(const ClosedPolyline &object) = default;
 
@@ -167,6 +171,10 @@ Triangle::Triangle(const std::vector<Point> &points) : ClosedPolyline(points) {
     }
 }
 
+Triangle::~Triangle() = default;
+
+Triangle::Triangle(const Triangle &object) = default;
+
 std::string Triangle::getInformation() {
     std::ostringstream oss;
     oss << "Triangle: ";
@@ -180,6 +188,10 @@ std::string Triangle::getInformation() {
 Polygon::Polygon() : ClosedPolyline() {}
 
 Polygon::Polygon(const std::vector<Point> &points) : ClosedPolyline(points) {}
+
+Polygon::~Polygon() = default;
+
+Polygon::Polygon(const Polygon &object) = default;
 
 std::string Polygon::getInformation() {
     std::ostringstream oss;
@@ -208,6 +220,10 @@ RegularPolygon::RegularPolygon(const std::vector<Point> &points) : Polygon(point
     }
 }
 
+RegularPolygon::~RegularPolygon() = default;
+
+RegularPolygon::RegularPolygon(const RegularPolygon &object) = default;
+
 std::string RegularPolygon::getInformation() {
     std::ostringstream oss;
     oss << "Regular polygon: ";
@@ -229,6 +245,10 @@ Trapezoid::Trapezoid(const std::vector<Point> &points) : Polygon(points) {
           isParallel(vectorFromPoints(points_[0], points_[3]), vectorFromPoints(points[2], points[1]))))
         throw std::runtime_error("This is not a regular trapezoid.");
 }
+
+Trapezoid::~Trapezoid() = default;
+
+Trapezoid::Trapezoid(const Trapezoid &object) = default;
 
 std::string Trapezoid::getInformation() {
     std::ostringstream oss;

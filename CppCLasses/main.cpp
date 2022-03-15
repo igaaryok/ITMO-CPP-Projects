@@ -46,8 +46,8 @@ int main() {
     Polynomial pole(5, {2, 0, 4});
     Polynomial poly(3, {2});
     Polynomial poll;
-    poll += pole * 0;
-    ss << poly << std::endl;
+    pole *= poly;
+    ss << (poly / 2) << std::endl;
     ss << pole << std::endl;
     ss << (pole * poly) + (poly * pole) << std::endl;
     std::cout << ss.str();

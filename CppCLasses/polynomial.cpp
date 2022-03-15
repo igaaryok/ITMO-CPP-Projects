@@ -111,7 +111,7 @@ Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs) {
     return lhs + temp;
 }
 
-Polynomial operator*(const Polynomial &lhs, int rhs) {
+Polynomial operator*(const Polynomial &lhs, double rhs) {
     Polynomial temp;
     std::pair<double, int> tempPair;
     for (auto i:lhs.pol_) {
@@ -122,7 +122,7 @@ Polynomial operator*(const Polynomial &lhs, int rhs) {
     return temp;
 }
 
-Polynomial operator*(int lhs, const Polynomial &rhs){
+Polynomial operator*(double lhs, const Polynomial &rhs){
     return rhs * lhs;
 }
 
@@ -140,6 +140,14 @@ Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs){
     return temp2;
 }
 
+Polynomial operator/(const Polynomial &lhs, double rhs){
+    Polynomial temp = lhs;
+    for (auto & i : temp.pol_) {
+        i.first /= rhs;
+    }
+    return temp;
+}
+
 Polynomial Polynomial::operator+=(const Polynomial &other) {
     *this = other + *this;
     return *this;
@@ -150,6 +158,28 @@ Polynomial Polynomial::operator-=(const Polynomial &other) {
     return *this;
 }
 
+Polynomial Polynomial::operator*=(const Polynomial &other) {
+    *this = *this * other;
+    return *this;
+}
+
+Polynomial Polynomial::operator*=(double &other) {
+    *this = *this * other;
+    return *this;
+}
+
+Polynomial Polynomial::operator/=(double other) {
+    *this = *this / other;
+    return *this;
+}
+
+int Polynomial::operator[](int number) const {
+    return pol_[number].second;
+}
+
+std::pair<double, int> &Polynomial::operator[](int number){
+    return pol_[number];
+}
 
 
 

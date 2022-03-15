@@ -32,16 +32,27 @@ public:
 
     friend Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs);
 
-    friend Polynomial operator*(const Polynomial &lhs, int rhs);
+    friend Polynomial operator*(const Polynomial &lhs, double rhs);
 
-    friend Polynomial operator*(int lhs, const Polynomial &rhs);
+    friend Polynomial operator*(double lhs, const Polynomial &rhs);
 
     friend Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs);
+
+    friend Polynomial operator/(const Polynomial &lhs, double rhs);
 
     Polynomial operator+=(const Polynomial &other);
 
     Polynomial operator-=(const Polynomial &other);
 
+    Polynomial operator*=(const Polynomial &other);
+
+    Polynomial operator*=(double &other);
+
+    Polynomial operator/=(double other);
+
+    int operator[](int number) const;
+
+    std::pair<double, int> &operator[](int number);
 
 };
 
