@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(ITMO_CPP_Projects
         "CppCLasses/main.cpp" "CppCLasses/shapes.h" "CppCLasses/polynomial.h" "CppCLasses/shapes.cpp" "CppCLasses/polynomial.cpp")
+
