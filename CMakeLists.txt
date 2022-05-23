@@ -3,4 +3,6 @@ project(ITMO_CPP_Projects)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ITMO_CPP_Projects "Allocator/PoolAllocator.h" "Allocator/main.cpp")
+add_executable(ITMO_CPP_Projects
+        "CppCLasses/main.cpp" "CppCLasses/shapes.h" "CppCLasses/polynomial.h" "CppCLasses/shapes.cpp" "CppCLasses/polynomial.cpp")
+
