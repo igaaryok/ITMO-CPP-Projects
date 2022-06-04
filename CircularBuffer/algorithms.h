@@ -53,17 +53,30 @@ namespace algo {
             return false;
     }
 
-    template<class iterator>
-    bool is_sorted(iterator begin, iterator end) {
-        if (begin == end) {
-            return true;
-        }
-        iterator tempIt = begin;
-        for (iterator i = begin; i != end; ++i) {
-            if (*i < *tempIt) {
-                return false;
+    template <class ForwardIt, class Compare>
+    bool is_sorted(ForwardIt first, ForwardIt last, Compare comp)
+    {
+        if (first != last) {
+            ForwardIt next = first;
+            while (++next != last) {
+                if (comp(*next, *first))
+                    return false;
+                first = next;
             }
-            ++tempIt;
+        }
+        return true;
+    }
+
+    template <class ForwardIt>
+    bool is_sorted(ForwardIt first, ForwardIt last)
+    {
+        if (first != last) {
+            ForwardIt next = first;
+            while (++next != last) {
+                if (*next < *first)
+                    return false;
+                first = next;
+            }
         }
         return true;
     }
@@ -93,25 +106,48 @@ namespace algo {
         return last;
     }
 
+//    template<class iterator, class T>
+//    iterator find_backward(iterator first, iterator last, const T &val) {
+//        while (last != first) {
+//            if (*last == val) return last;
+//            --last;
+//        }
+//        return first;
+//    }
+
     template<class iterator, class T>
-    iterator find_backward(iterator first, iterator last, const T &val) {
-        while (last != first) {
-            if (*last == val) return last;
-            --last;
+    constexpr iterator find_backward(iterator first, iterator last, const T& value)
+    {
+        for (; (first-1) != last; --last) {
+            if (*last == value) {
+                return last;
+            }
         }
-        return first;
+        return last;
     }
 
-    template<class iterator, class predicate>
-    bool is_polindrome(iterator begin, iterator end, predicate pred) {
-        std::vector<bool> answer;
-        while (begin != end) {
-            answer.push_back(pred(*begin));
+
+    template<class RandomAccessIterator, class predicate>
+    bool is_polindrome(RandomAccessIterator begin, RandomAccessIterator end, predicate comp) {
+        int i = 0;
+        while ((begin + i) != end) {
+            if (!comp(*(begin+i), *(end-i))){
+                return false;
+            }
             ++begin;
         }
-        for (std::size_t i = 0, j = answer.size() - 1; i < j; ++i, --j)
-            if (answer[i] != answer[j])
+        return true;
+    }
+
+    template<class RandomAccessIterator>
+    bool is_polindrome(RandomAccessIterator begin, RandomAccessIterator end) {
+        int i = 0;
+        while ((begin + i) != end) {
+            if (*(begin + i) != *(end - i - 1)){
                 return false;
+            }
+            ++i;
+        }
         return true;
     }
 }

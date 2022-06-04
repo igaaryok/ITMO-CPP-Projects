@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
     v.push_back(3);
     v.push_back(4);
 
-    std::sort(c.begin(), c.end());
 
     for (int i = 0; i < 3; ++i) {
         std::cout << c[i] << " ";
@@ -55,7 +54,12 @@ int main(int argc, char *argv[])
 
     std::cout << "Not zero in buffer: " << *algo::find_not(v.begin(), v.end(), 0) << "\n";
 
-    std::cout << "Find backward: " << *algo::find_backward(v.begin(), v.end(), 4);
+    std::cout << "Find backward: " << *algo::find_backward(v.begin(), v.end(), 1) << "\n";
+
+    std::string str = "LOL";
+
+    std::cout << "Is polindrome: " << algo::is_polindrome(str.begin(), str.end()) << "\n";
+
 
     std::cout << "\n___________\n";
 
