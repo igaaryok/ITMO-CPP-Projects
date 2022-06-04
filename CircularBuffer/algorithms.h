@@ -140,7 +140,7 @@ namespace algo {
     }
 
     template<class RandomAccessIterator>
-    bool is_polindrome(RandomAccessIterator begin, RandomAccessIterator end) {
+    bool is_palindrome(RandomAccessIterator begin, RandomAccessIterator end) {
         int i = 0;
         while ((begin + i) != end) {
             if (*(begin + i) != *(end - i - 1)){
