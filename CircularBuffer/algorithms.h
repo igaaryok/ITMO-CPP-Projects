@@ -40,22 +40,19 @@ namespace algo {
 
     template<class iterator, class predicate>
     bool one_of(iterator begin, iterator end, predicate pred) {
-        int is_true = 0;
+        bool is_true = false;
         while (begin != end) {
             if (pred(*begin)) {
-                is_true++;
+                if (!is_true) is_true = true;
+                else return false;
             }
             ++begin;
         }
-        if (is_true == 1)
-            return true;
-        else
-            return false;
+        return true;
     }
 
-    template <class ForwardIt, class Compare>
-    bool is_sorted(ForwardIt first, ForwardIt last, Compare comp)
-    {
+    template<class ForwardIt, class Compare>
+    bool is_sorted(ForwardIt first, ForwardIt last, Compare comp) {
         if (first != last) {
             ForwardIt next = first;
             while (++next != last) {
@@ -67,9 +64,8 @@ namespace algo {
         return true;
     }
 
-    template <class ForwardIt>
-    bool is_sorted(ForwardIt first, ForwardIt last)
-    {
+    template<class ForwardIt>
+    bool is_sorted(ForwardIt first, ForwardIt last) {
         if (first != last) {
             ForwardIt next = first;
             while (++next != last) {
@@ -81,24 +77,21 @@ namespace algo {
         return true;
     }
 
-    template<class iterator, class predicate>
-    bool is_partitioned(iterator begin, iterator end, predicate pred) {
-        while (begin != end and pred(*begin)) {
-            ++begin;
-        }
-        while (begin != end) {
-            if (pred(*begin)) {
+    template<class InputIt, class UnaryPredicate>
+    bool is_partitioned(InputIt first, InputIt last, UnaryPredicate p) {
+        for (; first != last; ++first)
+            if (!p(*first))
+                break;
+        for (; first != last; ++first)
+            if (p(*first))
                 return false;
-            }
-            ++begin;
-        }
         return true;
     }
 
     template<class _tp, class T>
     _tp find_not(_tp first, _tp last, const T &val) {
         while (first != last) {
-            if (*first != val){
+            if (*first != val) {
                 return first;
             }
             ++first;
@@ -106,19 +99,9 @@ namespace algo {
         return last;
     }
 
-//    template<class iterator, class T>
-//    iterator find_backward(iterator first, iterator last, const T &val) {
-//        while (last != first) {
-//            if (*last == val) return last;
-//            --last;
-//        }
-//        return first;
-//    }
-
     template<class iterator, class T>
-    constexpr iterator find_backward(iterator first, iterator last, const T& value)
-    {
-        for (; (first-1) != last; --last) {
+    constexpr iterator find_backward(iterator first, iterator last, const T &value) {
+        for (; (first - 1) != last; --last) {
             if (*last == value) {
                 return last;
             }
@@ -126,12 +109,11 @@ namespace algo {
         return last;
     }
 
-
     template<class RandomAccessIterator, class predicate>
-    bool is_polindrome(RandomAccessIterator begin, RandomAccessIterator end, predicate comp) {
+    bool is_palindrome(RandomAccessIterator begin, RandomAccessIterator end, predicate comp) {
         int i = 0;
         while ((begin + i) != end) {
-            if (!comp(*(begin+i), *(end-i))){
+            if (!comp(*(begin + i), *(end - i))) {
                 return false;
             }
             ++begin;
@@ -143,7 +125,7 @@ namespace algo {
     bool is_palindrome(RandomAccessIterator begin, RandomAccessIterator end) {
         int i = 0;
         while ((begin + i) != end) {
-            if (*(begin + i) != *(end - i - 1)){
+            if (*(begin + i) != *(end - i - 1)) {
                 return false;
             }
             ++i;

@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     std::string str = "LOL";
 
-    std::cout << "Is polindrome: " << algo::is_polindrome(str.begin(), str.end()) << "\n";
+    std::cout << "Is polindrome: " << algo::is_palindrome(str.begin(), str.end()) << "\n";
 
 
     std::cout << "\n___________\n";
