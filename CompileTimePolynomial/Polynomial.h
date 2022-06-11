@@ -5,6 +5,10 @@
 #ifndef ITMO_CPP_PROJECTS_POLYNOMIAL_H
 #define ITMO_CPP_PROJECTS_POLYNOMIAL_H
 
+#include <string>
+#include <sstream>
+
+
 template<long value, long ...coefficients>
 class Polynomial {
 
@@ -13,6 +17,7 @@ public:
     long &operator[](size_t index) const {
         return coefficients_array_[index];
     }
+
 
     long long get_result() const noexcept {
         static constexpr long long result = polynomial_sum();
@@ -40,7 +45,7 @@ private:
             return 1;
         } else if (degree % 2 == 0) {
             return pow(index, degree / 2) * pow(index, degree / 2);
-        } else if (degree % 2 == 1) {
+        } else {
             return pow(index, degree - 1) * index;
         }
     }
@@ -51,5 +56,25 @@ private:
     }
 };
 
+template<long value, long ...coefficients>
+std::string str(Polynomial<value, coefficients...>) {
+    std::string str;
+    long temp[] = {coefficients...};
+    size_t tempSize = sizeof...(coefficients);
+    for (int i = 0; i < tempSize; ++i) {
+        str += std::to_string(temp[i]) + " * ";
+        if (value > 0) {
+            str += std::to_string(abs(value)) + "^" + std::to_string(tempSize - i) + " ";
+        } else {
+            str += "(-" + std::to_string(abs(value)) + ")" + "^" + std::to_string(tempSize - i) + " ";
+        }
+
+        if (i != tempSize - 1) {
+            if (temp[i + 1] > 0) str += "+ ";
+            else str += "- ";
+        }
+    }
+    return str;
+}
 
 #endif //ITMO_CPP_PROJECTS_POLYNOMIAL_H

@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(ITMO_CPP_Projects
         "CompileTimePolynomial/main.cpp"
-        "CompileTimePolynomial/Polynomial.cpp" "CompileTimePolynomial/Polynomial.h")
+        "CompileTimePolynomial/Polynomial.h")
